@@ -35,7 +35,6 @@ jobs:
           git config user.name "terminaate" 
           git remote add origin https://terminaate:${{secrets.DEPLOY}}@github.com/terminaate/mesto-prod.git
           git add *
-          git add server/.env
           git commit -m "Deploy $(date +'%Y-%m-%d')"
           git push -f origin main
           npm i semver -g
