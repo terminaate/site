@@ -22,8 +22,8 @@ jobs:
 
       - name: Build a source code
         run: |
+          npm i
           npm run build
-          cd ../
           
           
       - name: Deploy to terminaate.github.io
