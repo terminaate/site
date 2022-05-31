@@ -1,0 +1,49 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500&family=Source+Code+Pro&display=swap');
+
+@font-face {
+    src: url("../fonts/Whitney.otf");
+    font-family: "Whitney";
+}
+
+*, *:after, *:before {
+    padding: 0;
+    margin: 0;
+    outline: none;
+    box-sizing: border-box;
+}
+
+:root {
+    --background-primary: #000;
+    --background-secondary: rgba(0, 0, 0, 0.67);
+    --background-thirty: rgba(14, 13, 13, 0.53);
+    --text-primary: #fff;
+    --text-secondary: rgba(255, 255, 255, .5);
+    --font-primary: "Whitney", sans-serif;
+    --font-secondary: 'Source Code Pro', monospace;
+    --font-logo: 'Poppins', sans-serif;
+}
+
+::-webkit-scrollbar {
+    display: none;
+}
+
+html {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+body {
+    background-color: var(--background-primary);
+    color: var(--text-primary);
+    font-family: var(--font-primary);
+}
+
+.v-enter-active,
+.v-leave-active {
+    transition: opacity 0.3s;
+}
+
+.v-enter-from,
+.v-leave-to {
+    opacity: 0;
+}
