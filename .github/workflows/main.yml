@@ -33,7 +33,7 @@ jobs:
           git init 
           git config user.email "tntwnik@gmail.com"
           git config user.name "terminaate" 
-          git remote add origin https://terminaate:${{secrets.DEPLOY}}@github.com/terminaate/mesto-prod.git
+          git remote add origin https://terminaate:${{secrets.DEPLOY}}@github.com/terminaate/terminaate.github.io.git
           git add *
           git commit -m "Deploy $(date +'%Y-%m-%d')"
           git push -f origin main
