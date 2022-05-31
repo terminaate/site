@@ -27,7 +27,9 @@ export default {
   },
   watch: {
     isLoaderEnded(value) {
-      this.playerState = value;
+      if (value) {
+        this.playerState = true;
+      }
     }
   },
   methods: {

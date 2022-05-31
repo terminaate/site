@@ -1,6 +1,7 @@
 import {createRouter, createWebHistory} from 'vue-router'
 import HomePage from '../views/Home.vue'
-import ReposPage from "../views/Repos";
+import ReposPage from "../views/Repos.vue";
+import ErrorPage from "../views/Error.vue";
 
 export const routes = [
     {
@@ -18,6 +19,11 @@ export const routes = [
         meta: {
             label: "Repositories",
         }
+    },
+    {
+        path: '/:catchAll(.*)',
+        name: 'ErrorPage',
+        component: ErrorPage
     }
 ]
 

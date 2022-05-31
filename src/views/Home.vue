@@ -1,5 +1,5 @@
 <template>
-  <div class="home_view">
+  <div class="home_page">
     <div class="center_text">
       <span class="logo_text">Termina<span>a</span>te</span>
       <span class="desc_text">what are you doing here?</span>
@@ -33,7 +33,7 @@ export default {
 </script>
 
 <style scoped>
-.home_view {
+.home_page {
   position: absolute;
   height: 100%;
   width: 100%;

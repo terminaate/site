@@ -4,7 +4,7 @@
     <Transition>
       <div active="true" ref="routeMenu" v-if="routesMenu" class="routes_menu">
         <a :key="route" :active="$route.path === route.path" v-for="route in routes" @click="$router.push(route.path)">
-          {{ route.meta.label }}
+          {{ route.meta ? route.meta.label : "" }}
         </a>
       </div>
     </Transition>
@@ -14,7 +14,9 @@
         <span></span>
         <span></span>
       </div>
-      <PlayerControls :is-loader-ended="isLoaderEnded" :player="player"/>
+      <Transition>
+        <PlayerControls v-if="Boolean(routes[routes.findIndex(obj => obj.path === $route.path)])" :is-loader-ended="Boolean(routes[routes.findIndex(obj => obj.path === $route.path)]) && isLoaderEnded" :player="player"/>
+      </Transition>
     </div>
   </header>
 </template>

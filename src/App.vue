@@ -27,7 +27,7 @@ export default {
     return {
       player: null,
       isLoaderEnded: false,
-      routesMenu: true
+      routesMenu: true,
     }
   }
 }
