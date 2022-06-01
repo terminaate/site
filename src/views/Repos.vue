@@ -2,30 +2,27 @@
   <div class="repositories_page">
     <div class="container">
       <input v-model="searchInput" class="search_input" placeholder="Search repositories" type="text">
-      <div class="repos">
-        <div class="repo" v-for="repo in getPosts" :key="repo.id">
-          <div class="repo_header">
-            <div>
-              <a class="repo_avatar" href="https://github.com/terminaate.xyz" target="_blank">
-                <img :src="repo.ownerAvatar" alt="">
-              </a>
-              <a class="repo_name" :href="repo.url" target="_blank"> {{ repo.name }}</a>
+      <TransitionGroup name="repos" class="repos" tag="ul">
+          <ul class="repo" v-for="repo in getPosts" :key="repo.id">
+            <div class="repo_header">
+              <div>
+                <a class="repo_avatar" href="https://github.com/terminaate.xyz" target="_blank">
+                  <img :src="repo.ownerAvatar" alt="">
+                </a>
+                <a class="repo_name" :href="repo.url" target="_blank"> {{ repo.name }}</a>
+              </div>
+              <img class="repo_lang" :src="getIconByLanguage(repo.language)" alt="">
             </div>
-            <img class="repo_lang" :src="getIconByLanguage(repo.language)" alt="">
-          </div>
-          <div class="repo_main">
-            <span class="repo_description"> {{ repo.description }} </span>
-            <div class="repo_updated-at">
-              <i class="uil uil-clock"></i>
-              <!--            <img src="" alt="">-->
-              <span>{{ `${repo.updated_at.day} ${repo.updated_at.month} ${repo.updated_at.year}` }}</span>
+            <div class="repo_main">
+              <span class="repo_description"> {{ repo.description }} </span>
+              <div class="repo_updated-at">
+                <i class="uil uil-clock"></i>
+                <!--            <img src="" alt="">-->
+                <span>{{ `${repo.updated_at.day} ${repo.updated_at.month} ${repo.updated_at.year}` }}</span>
+              </div>
             </div>
-          </div>
-          <div class="repo_icons">
-
-          </div>
-        </div>
-      </div>
+          </ul>
+      </TransitionGroup>
     </div>
   </div>
 </template>
@@ -114,20 +111,20 @@ export default {
 .container {
   z-index: 15;
   height: calc(100% - 100px);
-  width: 55%;
+  padding-inline: 16px;
+  /*min-width: 55%;*/
+  min-width: 55%;
   font-family: var(--font-secondary);
-  /*border: 1px solid white;*/
   display: flex;
   justify-content: center;
   flex-direction: column;
 }
 
 .search_input {
+  width: 100%;
   padding: 15px;
   background: none;
-  /*background-color: var(--background-thirty);*/
   border: 1px solid var(--text-primary);
-  /*border-radius: 5px;*/
   font-family: var(--font-secondary);
   color: var(--text-primary);
 }
@@ -135,10 +132,27 @@ export default {
 .repos {
   margin-top: 30px;
   height: 70%;
-  width: 100%;
+  width: auto;
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-gap: 20px;
+}
+
+@media screen and (max-width: 744px) {
+  .repos {
+    grid-template-columns: 1fr;
+  }
+}
+
+.repos-enter-active,
+.repos-leave-active {
+  transition: all 0.5s ease;
+}
+
+.repos-enter-from,
+.repos-leave-to {
+  opacity: 0;
+  transform: translateX(30px);
 }
 
 .repo {
@@ -146,11 +160,17 @@ export default {
   cursor: default;
   /*background-color: var(--background-thirty);*/
   /*border-radius: 5px;*/
-  border: 1px solid white;
+  border: 1px solid var(--text-primary);
   padding: 17px;
   transition: .2s;
   min-height: 150px;
-  max-height: 170px;
+  width: 400px;
+}
+
+@media screen and (max-width: 826px) {
+  .repo {
+    width: auto;
+  }
 }
 
 .repo_header {

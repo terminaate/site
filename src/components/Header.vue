@@ -1,8 +1,8 @@
 <template>
-  <header>
+  <header ref="header" :active="true">
     <a @click="homeLinkHandler" class="home_link">Termina<span>a</span>te</a>
     <Transition>
-      <div active="true" ref="routeMenu" v-if="routesMenu" class="routes_menu">
+      <div v-if="routesMenu" ref="menu" class="menu">
         <a :key="route" :active="$route.path === route.path" v-for="route in routes" @click="$router.push(route.path)">
           {{ route.meta ? route.meta.label : "" }}
         </a>
@@ -15,7 +15,9 @@
         <span></span>
       </div>
       <Transition>
-        <PlayerControls v-if="Boolean(routes[routes.findIndex(obj => obj.path === $route.path)])" :is-loader-ended="Boolean(routes[routes.findIndex(obj => obj.path === $route.path)]) && isLoaderEnded" :player="player"/>
+        <PlayerControls v-if="Boolean(routes[routes.findIndex(obj => obj.path === $route.path)])"
+                        :is-loader-ended="Boolean(routes[routes.findIndex(obj => obj.path === $route.path)]) && isLoaderEnded"
+                        :player="player"/>
       </Transition>
     </div>
   </header>
@@ -64,9 +66,11 @@ export default {
         currentScrollY = window.pageYOffset
 
         if (currentScrollY < 17) {
-          this.$refs.routeMenu.setAttribute("active", "true")
+          this.$refs.header.setAttribute("active", "true")
+          this.$refs.menu.setAttribute("active", "true")
         } else if (currentScrollY > lastKnownScrollY) {
-          this.$refs.routeMenu.setAttribute("active", "false")
+          this.$refs.header.setAttribute("active", "false")
+          this.$refs.menu.setAttribute("active", "false")
         }
 
         lastKnownScrollY = currentScrollY
@@ -88,6 +92,7 @@ header {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  transition: .3s;
 }
 
 .left_content {
@@ -140,18 +145,18 @@ header {
   width: 1rem;
 }
 
-.routes_menu {
+.menu {
   display: flex;
   align-items: center;
   justify-content: center;
   transition: .3s;
 }
 
-.routes_menu[active="false"] {
+.menu[active="false"] {
   transform: translateY(-350%);
 }
 
-.routes_menu a {
+.menu a {
   cursor: pointer;
   margin-inline: 10px;
   padding-bottom: 5px;
@@ -159,7 +164,13 @@ header {
   transition: border-color .3s ease-in;
 }
 
-.routes_menu a[active="true"] {
+.menu a[active="true"] {
   border-color: var(--text-primary);
+}
+
+@media screen and (max-width: 1063px) {
+  header[active="false"] {
+    transform: translateY(-350%);
+  }
 }
 </style>

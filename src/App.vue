@@ -29,6 +29,12 @@ export default {
       isLoaderEnded: false,
       routesMenu: true,
     }
+  },
+
+  mounted() {
+    window.oncontextmenu = (e) => {
+      e.preventDefault()
+    }
   }
 }
 </script>
